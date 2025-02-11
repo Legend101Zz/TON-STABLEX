@@ -113,3 +113,52 @@ What makes _TeleStable_ unique is that users pay a _small extra fee_ on transact
 ✅ More developer rewards = More dApps & community adoption.
 
 This creates a _virtuous cycle_ that boosts the value, usability, and adoption of _StableX_ across the _TON ecosystem_!
+
+# TeleStable System Architecture
+
+```mermaid
+graph TD
+    subgraph User Interaction Layer
+        TG[Telegram Bot/Mini App]
+        UI[Web Interface]
+    end
+
+    subgraph Core Protocol Layer
+        CDP[CDP Vault Contract]
+        FM[Fee Manager Contract]
+        YM[Yield Manager Contract]
+        TR[Treasury Contract]
+        DEF[Developer Ecosystem Fund]
+    end
+
+    subgraph Asset Layer
+        BTC[TON Teleport BTC Bridge]
+        STX[StableX Token Contract]
+    end
+
+    subgraph External Systems
+        YP[Yield Protocols]
+        DS[Developer Services]
+    end
+
+    TG --> CDP
+    UI --> CDP
+
+    CDP --> BTC
+    CDP --> STX
+    CDP --> FM
+
+    FM --> TR
+    FM --> DEF
+
+    TR --> YM
+    YM --> YP
+    YM --> STX
+
+    DEF --> DS
+
+    classDef contract fill:#f9f,stroke:#333,stroke-width:2px
+    classDef external fill:#bbf,stroke:#333,stroke-width:2px
+    class CDP,FM,YM,TR,DEF,STX contract
+    class BTC,YP,DS external
+```
